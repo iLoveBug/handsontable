@@ -374,6 +374,9 @@ class DataManager {
    * @returns {boolean}
    */
   hasChildren(row) {
+    // if undefined, return false
+    if (row === undefined) return false;
+
     let rowObj = row;
 
     if (!isNaN(rowObj)) {
