@@ -474,4 +474,27 @@ export class NestedRows extends BasePlugin {
     this.dataManager.setData(data);
     this.dataManager.rewriteCache();
   }
+
+  /**
+   * collapse all rows
+   */
+  collapseAll() {
+    this.collapsingUI.collapseAll();
+  }
+
+  /**
+   * expand all collapsed rows
+   */
+  expandAll() {
+    this.collapsingUI.expandAll();
+  }
+
+  /**
+   * check if any parent is collapsed
+   *
+   * @returns {boolean}
+   */
+  isCollapsed() {
+    return this.collapsingUI.isAnyChildrenCollapsed(null);
+  }
 }

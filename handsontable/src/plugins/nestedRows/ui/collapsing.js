@@ -412,6 +412,17 @@ class CollapsingUI extends BaseUI {
   }
 
   /**
+   * Check if any child rows are collapsed.
+   *
+   * @returns {boolean}
+   */
+  isAnyChildrenCollapsed() {
+    return this.plugin.collapsedRowsMap.indexedValues.reduce((prev, current) => {
+      return prev || current;
+    }, false);
+  }
+
+  /**
    * Check if any of the row object parents are collapsed.
    *
    * @private
