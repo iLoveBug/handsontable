@@ -443,7 +443,7 @@ class DataManager {
     let childElement = element;
 
     // if beforeAddChild hook return false, the action is cancelled
-    if (!this.hot.runHooks('beforeAddChild', parent, childElement)) return
+    if (!this.hot.runHooks('beforeAddChild', parent, childElement)) return;
 
     let parentIndex = null;
 
