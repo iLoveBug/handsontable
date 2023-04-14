@@ -450,8 +450,7 @@ class DataManager {
   addChild(parent, element) {
     let childElement = element;
 
-    // if beforeAddChild hook return false, the action is cancelled
-    if (!this.hot.runHooks('beforeAddChild', parent, childElement)) return;
+    this.hot.runHooks('beforeAddChild', parent, childElement);
 
     let parentIndex = null;
 
@@ -500,7 +499,7 @@ class DataManager {
       childElement = this.mockNode();
     }
 
-    if (!this.hot.runHooks('beforeAddChild', parent, childElement, index)) return;
+    this.hot.runHooks('beforeAddChild', parent, childElement, index);
 
     if (parent) {
       const parentIndex = this.getRowIndex(parent);
