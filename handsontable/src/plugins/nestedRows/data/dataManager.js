@@ -223,7 +223,15 @@ class DataManager {
     const fakeNode = {};
 
     objectEach(this.data[0], (val, key) => {
-      fakeNode[key] = null;
+      if (typeof val === 'object' && val !== null) {
+        fakeNode[key] = {};
+        Object.keys(val).forEach((item) => {
+          fakeNode[key][item] = null;
+        });
+      } else {
+        fakeNode[key] = null;
+      }
+
     });
 
     return fakeNode;
@@ -492,7 +500,7 @@ class DataManager {
       childElement = this.mockNode();
     }
 
-    this.hot.runHooks('beforeAddChild', parent, childElement, index);
+    if (!this.hot.runHooks('beforeAddChild', parent, childElement, index)) return;
 
     if (parent) {
       const parentIndex = this.getRowIndex(parent);

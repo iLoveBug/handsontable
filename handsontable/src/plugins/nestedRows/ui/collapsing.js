@@ -417,9 +417,7 @@ class CollapsingUI extends BaseUI {
    * @returns {boolean}
    */
   isAnyChildrenCollapsed() {
-    return this.plugin.collapsedRowsMap.indexedValues.reduce((prev, current) => {
-      return prev || current;
-    }, false);
+    return this.lastCollapsedRows && this.lastCollapsedRows.length > 0;
   }
 
   /**
