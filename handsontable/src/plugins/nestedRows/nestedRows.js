@@ -497,4 +497,14 @@ export class NestedRows extends BasePlugin {
   isCollapsed() {
     return this.collapsingUI.isAnyChildrenCollapsed(null);
   }
+
+  /**
+   * get the physical row of a object
+   *
+   * @param {object} rowObj The row object.
+   * @returns {integer}
+   */
+  getRowIndex(rowObj) {
+    return this.dataManager.getRowIndex(rowObj);
+  }
 }

@@ -223,7 +223,7 @@ class DataManager {
     const fakeNode = {};
 
     objectEach(this.data[0], (val, key) => {
-      if (typeof val === 'object' && val !== null) {
+      if (typeof val === 'object' && val !== null && key !== '__children') {
         fakeNode[key] = {};
         Object.keys(val).forEach((item) => {
           fakeNode[key][item] = null;
@@ -481,7 +481,7 @@ class DataManager {
     this.hot.rowIndexMapper.insertIndexes(newRowIndex, 1);
 
     this.hot.runHooks('afterCreateRow', newRowIndex, 1);
-    this.hot.runHooks('afterAddChild', parent, childElement);
+    this.hot.runHooks('afterAddChild', parent, childElement, newRowIndex, parentIndex);
   }
 
   /**
@@ -492,6 +492,7 @@ class DataManager {
    * @param {object} [element] Element (node) to insert.
    */
   addChildAtIndex(parent, index, element) {
+    let parentIndex;
     let childElement = element;
     let flattenedIndex;
 
@@ -502,7 +503,7 @@ class DataManager {
     this.hot.runHooks('beforeAddChild', parent, childElement, index);
 
     if (parent) {
-      const parentIndex = this.getRowIndex(parent);
+      parentIndex = this.getRowIndex(parent);
       const finalChildIndex = parentIndex + index + 1;
 
       this.hot.runHooks('beforeCreateRow', finalChildIndex, 1);
@@ -539,7 +540,7 @@ class DataManager {
     // Workaround for refreshing cache losing the reference to the mocked row.
     childElement = this.getDataObject(flattenedIndex);
 
-    this.hot.runHooks('afterAddChild', parent, childElement, index);
+    this.hot.runHooks('afterAddChild', parent, childElement, index, parentIndex);
   }
 
   /**
