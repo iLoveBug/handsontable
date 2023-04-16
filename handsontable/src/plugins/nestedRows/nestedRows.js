@@ -507,4 +507,14 @@ export class NestedRows extends BasePlugin {
   getRowIndex(rowObj) {
     return this.dataManager.getRowIndex(rowObj);
   }
+
+  /**
+   * Get the parent of the row at the provided index.
+   *
+   * @param {number|object} row Physical row index.
+   * @returns {object}
+   */
+  getRowParent(row) {
+    return this.dataManager.getRowParent(row);
+  }
 }

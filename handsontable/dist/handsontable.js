@@ -26,7 +26,7 @@
  * USE OR INABILITY TO USE THIS SOFTWARE.
  * 
  * Version: 12.3.3
- * Release date: 28/03/2023 (built at 15/04/2023 14:24:08)
+ * Release date: 28/03/2023 (built at 15/04/2023 15:42:57)
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -41833,7 +41833,7 @@ Handsontable.hooks = _pluginHooks.default.getSingleton();
 Handsontable.CellCoords = _src.CellCoords;
 Handsontable.CellRange = _src.CellRange;
 Handsontable.packageName = 'handsontable';
-Handsontable.buildDate = "15/04/2023 14:24:08";
+Handsontable.buildDate = "15/04/2023 15:42:57";
 Handsontable.version = "12.3.3";
 Handsontable.languages = {
   dictionaryKeys: _registry.dictionaryKeys,
@@ -91418,6 +91418,18 @@ var NestedRows = /*#__PURE__*/function (_BasePlugin) {
     key: "getRowIndex",
     value: function getRowIndex(rowObj) {
       return this.dataManager.getRowIndex(rowObj);
+    }
+
+    /**
+     * Get the parent of the row at the provided index.
+     *
+     * @param {number|object} row Physical row index.
+     * @returns {object}
+     */
+  }, {
+    key: "getRowParent",
+    value: function getRowParent(row) {
+      return this.data.getRowParent(row);
     }
   }], [{
     key: "PLUGIN_KEY",
