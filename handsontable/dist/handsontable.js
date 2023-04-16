@@ -26,7 +26,7 @@
  * USE OR INABILITY TO USE THIS SOFTWARE.
  * 
  * Version: 12.3.3
- * Release date: 28/03/2023 (built at 15/04/2023 15:42:57)
+ * Release date: 28/03/2023 (built at 16/04/2023 15:12:25)
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -41833,7 +41833,7 @@ Handsontable.hooks = _pluginHooks.default.getSingleton();
 Handsontable.CellCoords = _src.CellCoords;
 Handsontable.CellRange = _src.CellRange;
 Handsontable.packageName = 'handsontable';
-Handsontable.buildDate = "15/04/2023 15:42:57";
+Handsontable.buildDate = "16/04/2023 15:12:25";
 Handsontable.version = "12.3.3";
 Handsontable.languages = {
   dictionaryKeys: _registry.dictionaryKeys,
@@ -51815,11 +51815,19 @@ var DataSource = /*#__PURE__*/function () {
   }, {
     key: "getAtColumn",
     value: function getAtColumn(column) {
-      var _this = this;
       var result = [];
-      (0, _array.arrayEach)(this.data, function (row, rowIndex) {
-        var value = _this.getAtCell(rowIndex, column);
-        result.push(value);
+      var _this = this;
+      var getColumn = function getColumn(row, col, arr) {
+        var prop = _this.colToProp(col);
+        arr.push(row[prop]);
+        if (row.__children && row.__children.length) {
+          row.__children.forEach(function (child) {
+            getColumn(child, col, arr);
+          });
+        }
+      };
+      (0, _array.arrayEach)(this.data, function (row) {
+        getColumn(row, column, result);
       });
       return result;
     }
@@ -91429,7 +91437,7 @@ var NestedRows = /*#__PURE__*/function (_BasePlugin) {
   }, {
     key: "getRowParent",
     value: function getRowParent(row) {
-      return this.data.getRowParent(row);
+      return this.dataManager.getRowParent(row);
     }
   }], [{
     key: "PLUGIN_KEY",

@@ -93,11 +93,22 @@ class DataSource {
    */
   getAtColumn(column) {
     const result = [];
+    const _this = this;
 
-    arrayEach(this.data, (row, rowIndex) => {
-      const value = this.getAtCell(rowIndex, column);
+    const getColumn = function getColumn(row, col, arr) {
+      const prop = _this.colToProp(col);
 
-      result.push(value);
+      arr.push(row[prop]);
+
+      if (row.__children && row.__children.length) {
+        row.__children.forEach((child) => {
+          getColumn(child, col, arr);
+        });
+      }
+    };
+
+    arrayEach(this.data, (row) => {
+      getColumn(row, column, result);
     });
 
     return result;
