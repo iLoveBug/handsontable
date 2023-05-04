@@ -64,11 +64,18 @@ export class BottomOverlay extends Overlay {
   resetFixedPosition() {
     if (!this.needFullRender || !this.wot.wtTable.holder.parentNode) {
       // removed from DOM
+      if (this.clone.wtTable.holder.parentNode) {
+        const overlayRoot = this.clone.wtTable.holder.parentNode;
+
+        overlayRoot.style.display = 'none';
+      }
+
       return false;
     }
     const { rootWindow } = this.domBindings;
     const overlayRoot = this.clone.wtTable.holder.parentNode;
 
+    overlayRoot.style.display = 'initial';
     overlayRoot.style.top = '';
 
     let overlayPosition = 0;
